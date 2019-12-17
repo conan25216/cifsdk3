@@ -101,6 +101,7 @@ class HTTP(Client):
             logger.warning('retrying in %.00fs' % RETRIES_DELAY)
             sleep(RETRIES_DELAY)
 
+            print("uri:{}, params:{},timeout:{}".format(uri,params,self.timeout))
             resp = self.session.get(uri, params=params, verify=self.verify_ssl, timeout=self.timeout)
             if resp.status_code == 200:
                 break
