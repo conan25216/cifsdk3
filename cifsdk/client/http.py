@@ -85,6 +85,7 @@ class HTTP(Client):
         if not uri.startswith('http'):
             uri = self.remote + uri
 
+        print("uri is {}\n".format(uri))
         resp = self.session.get(uri, params=params, verify=self.verify_ssl, timeout=self.timeout)
         n = RETRIES
         try:
@@ -100,7 +101,6 @@ class HTTP(Client):
             logger.warning('setting random retry interval to spread out the load')
             logger.warning('retrying in %.00fs' % RETRIES_DELAY)
             sleep(RETRIES_DELAY)
-
             print("uri:{}, params:{},timeout:{}".format(uri,params,self.timeout))
             resp = self.session.get(uri, params=params, verify=self.verify_ssl, timeout=self.timeout)
             if resp.status_code == 200:
